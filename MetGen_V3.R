@@ -188,11 +188,10 @@ taxa_data
 taxa_long_data
 Metatop
 
-## Generación de documentos a partir del filtrado de los datos
-
-name = paste("MetaGen_ReadME",taxa[i],sep = "_")
+## Generación de documentos a partir del filtrado de los datos 
 
 for (i in 1:4) {
+  name = paste("MetaGen_ReadME",taxa[i],sep = "_")
   write_csv(taxa_data[[i]],file=paste("Taxa_data",name,".csv",sep="_"))
   write_csv(taxa_long_data[[i]],file=paste("Taxa_LD",name,".csv",sep="_"))
   write_csv(Metatop[[i]],file=paste("MetaTop",name,".csv",sep="_"))
@@ -200,7 +199,9 @@ for (i in 1:4) {
 
 
 ## Visualización de datos
+
 ##Tablas y Boxplots 
+name = paste("MetaGen_ReadME",taxa[i],sep = "_")
 
 for (i in 1:length(taxa)){
   x  <- taxa_long_data[[i]]
@@ -227,6 +228,7 @@ for (i in 1:length(diversity)) {
 names(diversityT) <- taxa
 
 for (i in 1:length(diversity)){
+  name = paste("MetaGen_ReadME",taxa[i],sep = "_")
   genboxplots(diversityT[[i]],name)
   write.csv(diversity[[i]],file=paste(name,".csv",sep="_"))
 }
