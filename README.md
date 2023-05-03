@@ -103,9 +103,23 @@ When filtering this dataframe by grouping, the results are not going to be shown
 
 Inside this loop the data is filtered to obtain a **Top n** of the results. Which means the program obtains a Top "n" from the different taxonomical data from species, genus, family and phyllum. The defalut is a **Top 10** but it can be modified depending on the study and what needs to be analyzed. 
 
+This modification can be done on the line:
+```Rscript
+dt <- dt %>% arrange(desc(Abundance)) %>% slice(1:10)  
+```
+The user must change `slice(1:n)`, to obtain a different Top. 
+
 # Data Visualization 
 
 In this section different outputs are created in the form of **.csv** documents and tables, barplots and boxplots that allow the user the visualization of the data. This outputs are helpful to make further statistical analysis because they have been filtered into different groups.
 
 ## Table Creation 
+
+In this part of the code, different tables are created after the filtering of the data. The code can be modified to make personalized outputs to give specific names to the individual analysis. 
+
+```Rscript
+name = paste("MetaGen",taxa[i],sep = "_") 
+```
+This line can be modified by adding specific identifiers to 
+
 ## Boxplot Creation 
