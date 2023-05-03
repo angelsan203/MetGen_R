@@ -140,7 +140,7 @@ invisible(lapply(packages, library, character.only = TRUE))
 setwd("~/Tec_BASE/scripts/Corrida_readme_metgen/") 
 raw_data <- read.table(file.choose(), header = T, sep = ",",quote = "", stringsAsFactors = F, fill = F) 
 raw_data
-raw_data[,-c(1,2,3)] <-lapply(raw_data[, -c(1,2,3)], as.integer)
+#raw_data[,-c(1,2,3)] <-lapply(raw_data[, -c(1,2,3)], as.integer)
 #raw_data <- raw_data[,c(n1,n2,n3)]
 str(raw_data)
 
@@ -188,9 +188,11 @@ taxa_data
 taxa_long_data
 Metatop
 
-## Generación de documentos a partir del filtrado de los datos 
+## Generación de documentos a partir del filtrado de los datos
+
+name = paste("MetaGen_ReadME",taxa[i],sep = "_")
+
 for (i in 1:4) {
-  name = paste("MetaGen",taxa[i],sep = "_")
   write_csv(taxa_data[[i]],file=paste("Taxa_data",name,".csv",sep="_"))
   write_csv(taxa_long_data[[i]],file=paste("Taxa_LD",name,".csv",sep="_"))
   write_csv(Metatop[[i]],file=paste("MetaTop",name,".csv",sep="_"))
@@ -202,7 +204,7 @@ for (i in 1:4) {
 
 for (i in 1:length(taxa)){
   x  <- taxa_long_data[[i]]
-  genbarplot(x,1,taxa[i],"MetaGen",mypal)
+  genbarplot(x,1,taxa[i],name,mypal)
 }
 
 #diversity tables and boxplots
@@ -225,8 +227,8 @@ for (i in 1:length(diversity)) {
 names(diversityT) <- taxa
 
 for (i in 1:length(diversity)){
-  name = paste("MetaGen",taxa[i],sep="_")
   genboxplots(diversityT[[i]],name)
   write.csv(diversity[[i]],file=paste(name,".csv",sep="_"))
 }
+
 
