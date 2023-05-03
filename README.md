@@ -25,15 +25,17 @@ geom_boxplot(fill=sample(mypal, length(treatcol)),fatten=1, outlier.shape = NA)
 ```
 
 It is recommended to use the hexadecimal code for the colors in order to get more specific and personalized colors depending on the study. If specificity is not required, the names of the colors can be used instead. 
+
 ### Nota 
-Es muy importante mencionar que al modificar estos parámetros se tome en cuenta 
+Is very important to mention that the modification of this parameters would depend solely on the requirements of the study. It depends on what needs to be shown or analyzed. 
 
-# Datos
-En la segunda sección del código se declara el pathway de la carpeta donde se encuentran los datos con los cuales va a trabajar el programa. Es importante mencionar que dentro de esta carpeta se van a guardar los diferentes documentos e imágenes resultantes de este análisis. Por esto se recomienda destinar Carpetas específicas para cada análisis indívidual. 
+# Data
+In the second section of the code, the pathway for the directory in which the analysis is going to take place is delcared. It's important to mention that every output of the analysis in the form of tables and images is goint to be saved inside this directory.  That's why it's recommended to have different Directories for each individual analysis. 
 
-Dentro de esta sección se hace un tratado de los datos para asegurar que el formato es el correcto y R o Rstudio no arroje códigos de error y códigos de advertencia. El input de este código debe de ser un archivo **.csv** o **.txt** proveniente del análisis taxonómico de [KRAKEN 2](https://github.com/DerrickWood/kraken2.). 
+This section of the code is destined to treat and format the data in order to avoid any type of errors or warnings. The input for this code must be a **.csv** or a **.txt** document from a taxonomic analysis using [KRAKEN 2](https://github.com/DerrickWood/kraken2.). 
 
-El input se debe de ver acomodado de la siguiente manera: 
+
+The input must have the following layout: 
 
 
 | Rank | TaxId | Scientific Name | Sample 1 | Sample 2 | Sample 3 | 
@@ -43,31 +45,31 @@ El input se debe de ver acomodado de la siguiente manera:
 | genus | 131079 | Limnobacter| 0 | 0 | 0 |
 | species | 2060312 | Altererythrobacter sp. B11 | 0 | 0 | 2 |
 
-Es recomendable modificar solamente los nombres de las muestras (samples) para evitar cualquier inconveniente con el programa. Los nombres de las muestras pueden ser modificados libremente dependiendo de lo que se busque observar en el estudio. Más información de como se tratan, filtran y agrupan las muestras puede ser observado en la sección de [**Filtrado**](#Filtrado)
-  
-En la línea:
+It is recommended that only the names of the samples are modified to avoid any issues or inconvenients with the program. The sample names can be modified freely depending on the analysis and what needs to be observed. To access more information regarding on how the data is treated and filtered, go to [**Filtering**](#Filtering).
+
+In the line:
 ```Rscript
 raw_data <- read.table(file.choose(), header = T, sep = "\t",quote = "", stringsAsFactors = F, fill = F)
 ```
 
-Se debe de modificar el parámetro `"sep ="` dependiendo del tipo de documento que se esté usando: para **.txt** se usa `"\t"` y para **.csv** se usa `","`.
+The `"sep ="` parameter must be modified depending on the type of document that is used: for **.txt** `"\t"` and for **.csv** `","`. 
 
-Las siguientes líneas de este código están dirigidas para asegurar que los datos se hayan introducido de manera correcta y no haya una pérdida de datos o se conviertan valores numéricos a strings y evitar que existan NA dentro de la tabla con la que se trabajará. 
+The following code lines are directed to assure that the data is inputted correctly and there's no data loss or change in values (numbers to strings) and to avoid the existence of NA values insde the table.
 
-La línea: 
+The line: 
 ```Rscript
 raw_data <- raw_data[,c(n1,n2,n3)]
 ```
-sirve para eliminar columnas que se hayan agregado en los pasos anteriores, ya sea al momento de cargar los datos, o al convertir los datos a números. Esta línea se puede modificar dependiendo del número de columnas que se hayan agregado. Ejemplo: si se agregaron dos columnas al final de un data frame que contenía 15 columnas originalmente, se tendrían que eliminar las columnas 16 y 17 (las dos que se agregaron). La línea quedaría de la siguiente manera `raw_data <- raw_data[,-c(16,17)]` de esta forma se eliminan las dos columnas agregadas por coerción. Esto no significa que haya una pérdida de datos, a veces las tablas que son arrojadas por KRAKEN contienen celdas invisibles que R las toma como columnas vacias y NA. 
+it's used to eliminate columns that might be added in previous steps, wheter it was when loadind the data or converting the numbers. This line can be modified depending on how many columns were added. E.g. if the data frame had 15 columns and now has 17 columns, columns 16 and 17 were added. In this case, the line must be modified with the following `raw_data <- raw_data[,-c(16,17)]`. In this way, the two columns that were added by coercion are eliminated. This does not mean that there is data loss, sometimes KRAKEN creates documents with invisible rows that R reads as nameless empty rows filled with NA's. If this columns are not eliminated, the program won't work as intended. 
 
-Las líneas:
+The lines:
   
 ```Rscript
 raw_data
 str(raw_data)
 ```
 
-funcionan para poder visualizar como fueron cargados los datos a R y ver si es que existe algún problema con los mismos. Si todo fue cargado de manera correcta se deberían de ver los datos de la misma manera que se ve el documento de origen. En el caso de `srt(raw_data)` se deben de ver los datos de la siguiente manera: 
+are meant to allow the user to visualize the data and how was read by R and see if there's any problem with the data. If everything was loaded sucessfully, when running `srt(raw_data)` the data must have the following format: 
             
 ```
  $ Rank           : chr  "unclassified" "superkingdom" "superkingdom" "superkingdom" ...
@@ -77,16 +79,17 @@ funcionan para poder visualizar como fueron cargados los datos a R y ver si es q
  $ Sample 2       : int  184966 73818 0 1 0 1 39 20 1 3 ...
  $ Sample 3       : int  329303 75747 0 0 0 0 29 0 0 0 ...
 ```
-Las siguientes líneas están destinadas a la creación de listas vacías para poder hacer el siguiente paso que es el filtrado de los datos a partir de 4 grupos taxonómicos. 
+The following lines are related to the creation of empty lists for making the next step in the analysis, the data filtering based on 4 taxonomic groups. 
             
-# Filtrado
+# Filtering
 
-En esta parte del programa se encuentra un loop que se encarga de filtrar los datos dependiendo del grupo taxonómico al que pertenecen **"phyllum"**, **"family"**, **"genus"**, o **"species"**. Esta sección del código tiene varios parámetros personalizables para poder satisfacer las necesidades de diferentes estudios. Uno de estos parámetros es el de la línea: 
+In this part of the code the user can find a loop that filters the data depending on the taxonomic group they belong to **"phyllum"**, **"family"**, **"genus"**, or **"species"**. In this section, there are various personalizable parameters to satisfy the requirements of various studies. One of these parameters is the one in the next line:
 
 ```Rscript
 #taxa_long_data[[i]]$Sample <- taxa_long_data[[i]]$Sample  %>% str_remove_all('[r\\d]') 
 ```
-Esta línea permite agrupar los datos de las muestras para poner juntas las diferentes réplicas de cada muestra. Esta línea está comentada por default para evitar el agrupamiento de muestras con nombres similares. Ejemplo en un data frame con los siguientes datos: 
+This line allows the user to group the samples with its own replicates. This line is commented by default to avoid grouping of samples with similar names. 
+The following data frame is is used to give an example on how data is grouped. 
 
 | Rank | TaxId | Scientific Name | SP1 | SP2 | SP3 | SP4
 | --- | --- | --- | --- | --- | --- | --- |
@@ -95,13 +98,14 @@ Esta línea permite agrupar los datos de las muestras para poner juntas las dife
 | genus | 131079 | Limnobacter| 0 | 0 | 0 | 90 |
 | species | 2060312 | Altererythrobacter sp. B11 | 0 | 0 | 2 | 10 |
 
-Al momento de hacer el filtrado de los datos no se van a reportar los resultados como muestras individuales "SP1, SP2, SP3, SP4", sino serán unidos todos los datos y serán reportados como las réplicas de SP. Es recomendable indicar códigos específicos para cada muestra y en caso de tener réplicas, poner los números. Es decir, en vez de poner: "Muestra1.1, Muestra1.2, Muestra2.1, Muestra2.2" , es mejor usar un código del estilo "A1, A2, B1, B2", así se agrupan las diferentes muestras con sus réplicas. En caso de no tener réplicas no es necesario hacer lo mencionado con anterioridad y dejar la línea comentada por default. Más ejemplos de cómo pueden ser los resultados pueden ser observados en [**Generación de Boxplots**](##Generación-de-Boxplots)
+When filtering this dataframe by grouping, the results are not going to be shown for individual samples as "SP1, SP2, SP3, SP4", instead, they are going to be grouped into sample SP and replicates. In this case, the line must be kept as default in order to show each sample as an individual. For grouping samples, the user must define the names of the samples and its replicates using the follwoing format "A1, A2, B1, B2". In this case the user has two samples with two replicates. The code will show results from samples "A" and "B" taking each replicate with its sample. For further information and more examples on how data can be grouped go to [**Boxplot Creation**](##Boxplot-Creation)
 
 
-Dentro de este mismo loop se filtran los datos para poder obtener un **Top n** de los datos, es decir, obtener un Top n de especies, generos, familias y filos. Se puede modificar el tamaño del top dependiendo de las necesidades del estudio. El default de este programa es un Top 10. 
+Inside this loop the data is filtered to obtain a **Top n** of the results. Which means the program obtains a Top "n" from the different taxonomical data from species, genus, family and phyllum. The defalut is a **Top 10** but it can be modified depending on the study and what needs to be analyzed. 
 
-# Visualización de datos 
+# Data Visualization 
 
-En esta sección se generan diferentes outputs en forma de documentos **.csv**, barplots y boxplots que ayudan a la visualización de los datos, así como son útiles para hacer análisis estadísticos posteriores debido a que ya pasaron por un normalizado y filtrado. 
-## Generación de tablas 
-## Generación de Boxplots 
+In this section different outputs are created in the form of **.csv** documents and tables, barplots and boxplots that allow the user the visualization of the data. This outputs are helpful to make further statistical analysis because they have been filtered into different groups.
+
+## Table Creation 
+## Boxplot Creation 
