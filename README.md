@@ -5,6 +5,10 @@ This program was designed for making a metagenomic analysis from 16s and shotgun
 
 This program aims to create statiscal analyses and allow the user the visualization of taxonomical data from KRAKEN 2. 
 
+# Demo Data
+
+If you want to see how the code works with some demo data, you can download it on the repository. The document is called taxonomic_clasiffication_ReadMe.csv
+
 # Libraries and Utils 
 
 The firts part of the code is designed to declare different functions that will be used for the creation of barplots and boxplots that will be part of the results and analysis. 
@@ -98,7 +102,7 @@ The following data frame is is used to give an example on how data is grouped.
 | genus | 131079 | Limnobacter| 0 | 0 | 0 | 90 |
 | species | 2060312 | Altererythrobacter sp. B11 | 0 | 0 | 2 | 10 |
 
-When filtering this dataframe by grouping, the results are not going to be shown for individual samples as "SP1, SP2, SP3, SP4", instead, they are going to be grouped into sample SP and replicates. In this case, the line must be kept as default in order to show each sample as an individual. For grouping samples, the user must define the names of the samples and its replicates using the follwoing format "A1, A2, B1, B2". In this case the user has two samples with two replicates. The code will show results from samples "A" and "B" taking each replicate with its sample. For further information and more examples on how data can be grouped go to [**Boxplot Creation**](##Boxplot-Creation)
+When filtering this dataframe by grouping, the results are not going to be shown for individual samples as "SP1, SP2, SP3, SP4", instead, they are going to be grouped into sample SP and replicates. In this case, the line must be kept as default in order to show each sample as an individual. For grouping samples, the user must define the names of the samples and its replicates using the follwoing format "A1, A2, B1, B2". In this case the user has two samples with two replicates. The code will show results from samples "A" and "B" taking each replicate with its sample. For further information and more examples on how data can be grouped go to [**Boxplot Creation**](#Boxplot-Creation)
 
 
 Inside this loop the data is filtered to obtain a **Top n** of the results. Which means the program obtains a Top "n" from the different taxonomical data from species, genus, family and phyllum. The defalut is a **Top 10** but it can be modified depending on the study and what needs to be analyzed. 
