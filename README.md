@@ -153,7 +153,16 @@ The outputs of these documents should look like the following tables:
 | Burkholderiaceae | SP1 | 893
 | Selenomonadaceae | SP1 | 5
 
-Further in the code, there are four documents more that get created. In the last loop, the program performs an statistical analysis to determine Shannon and Simpson indexes. There 
+Further in the code, there are four documents more that get created. In the last loop, the program performs an statistical analysis to determine Shannon and Simpson indexes. The **.csv** documents that are created have tables with the Shannon and Simpson indexes for each sample in each taxonomic group.
+
+These documents should be presented with the following format:
+
+| Sample | Shannon | Simpson
+| --- | --- | --- 
+| SP1 | 2.49878742275665 | 0.826907066675482
+| SP2 | 2.25058905458163 | 0.774696960815804
+| SP3 | 1.97042119751292 | 0.678785150456466
+| SP4 | 3.24981277477337 | 0.929375693849251
 
 
 ## Boxplot Creation 
