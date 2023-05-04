@@ -138,7 +138,7 @@ The outputs of these documents should look like the following tables:
 **For Taxa_Data (Family)**
 
 | Scientific.Name | SP1 | SP2 | SP3 | SP4
-| --- | --- | --- | ---
+| --- | --- | --- | --- | ---
 | Chthonomonadaceae | 0 | 0 | 0 | 2
 | Salinivirgaceae | 0 | 0 | 0 | 0
 | Hyphomonadaceae | 0 | 0 | 0 | 0
