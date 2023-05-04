@@ -122,7 +122,7 @@ name = paste("MetaGen_ReadME",taxa[i],sep = "_")
 ```
 This line can be modified by adding specific identifiers to make unique documents for each analysis. This can be done modifying `"MetaGen_ReadME"` to make something personalized for the research. E.g. `"MetaGen_Analysis1"`.
 
-After modifying this part of the code and running the loop, twelve **.csv** documents are going to be created, 3 documents per taxonomic group (**"phyllum"**, **"family"**, **"genus"**, and **"species"**). The documents called "Taxa_Data" have the full table of counts for each taxonomic group on each sample. the documents called "Taxa_LD" have the abundance of each taxonomic group for each sample. The documents called "MetaTop" is similar to "Taxa_LD" but it only has the **Top n** of each taxonomic group based on their abundance.  
+After modifying this part of the code and running the loop, twelve **.csv** documents are going to be created, 3 documents per taxonomic group (**"phyllum"**, **"family"**, **"genus"**, and **"species"**). The documents called `"Taxa_Data"` have the full table of counts for each taxonomic group on each sample. the documents called "Taxa_LD" have the abundance of each taxonomic group for each sample. The documents called `"MetaTop"` is similar to `"Taxa_LD"` but it only has the **Top n** of each taxonomic group based on their abundance.  
 
 The outputs of these documents should look like the following tables:
 
