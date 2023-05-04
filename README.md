@@ -127,8 +127,9 @@ After modifying this part of the code and running the loop, twelve **.csv** docu
 The outputs of these documents should look like the following tables:
 
 **For MetaTop (Family)**
+
 | Scientific Name | Sample | Abundace
-| --- | --- | --- | --- | --- | --- | --- |
+| --- | --- | ---
 | Pseudomonadaceae | SP1 | 61.0684020452676
 | Oxalobacteraceae | SP1 | 14.191725962741800
 | Micrococcaceae | SP1 | 8.821110594629390
@@ -137,7 +138,7 @@ The outputs of these documents should look like the following tables:
 **For Taxa_Data (Family)**
 
 | Scientific.Name | SP1 | SP2 | SP3 | SP4
-| --- | --- | --- | --- | --- | --- | --- |
+| --- | --- | ---
 | Chthonomonadaceae | 0 | 0 | 0 | 2
 | Salinivirgaceae | 0 | 0 | 0 | 0
 | Hyphomonadaceae | 0 | 0 | 0 | 0
@@ -146,7 +147,7 @@ The outputs of these documents should look like the following tables:
 **For Taxa_LD (Family)**
 
 | Scientific Name | Sample | Abundace
-| --- | --- | --- | --- | --- | --- | --- |
+| --- | --- | --- 
 | Leptospiraceae | SP1 | 2
 | Methylobacteriaceae | SP1 | 2
 | Burkholderiaceae | SP1 | 893
