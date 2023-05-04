@@ -118,8 +118,41 @@ In this section different outputs are created in the form of **.csv** documents 
 In this part of the code, different tables are created after the filtering of the data. The code can be modified to make personalized outputs to give specific names to the individual analysis. 
 
 ```Rscript
-name = paste("MetaGen",taxa[i],sep = "_") 
+name = paste("MetaGen_ReadME",taxa[i],sep = "_") 
 ```
-This line can be modified by adding specific identifiers to 
+This line can be modified by adding specific identifiers to make unique documents for each analysis. This can be done modifying `"MetaGen_ReadME"` to make something personalized for the research. E.g. `"MetaGen_Analysis1"`.
+
+After modifying this part of the code and running the loop, twelve **.csv** documents are going to be created, 3 documents per taxonomic group (**"phyllum"**, **"family"**, **"genus"**, and **"species"**). The documents called "Taxa_Data" have the full table of counts for each taxonomic group on each sample. the documents called "Taxa_LD" have the abundance of each taxonomic group for each sample. The documents called "MetaTop" is similar to "Taxa_LD" but it only has the **Top n** of each taxonomic group based on their abundance.  
+
+The outputs of these documents should look like the following tables:
+
+**For MetaTop (Family)**
+| Scientific Name | Sample | Abundace
+| --- | --- | --- | --- | --- | --- | --- |
+| Pseudomonadaceae | SP1 | 61.0684020452676
+| Oxalobacteraceae | SP1 | 14.191725962741800
+| Micrococcaceae | SP1 | 8.821110594629390
+| Planococcaceae | SP1 | 4.172775056316370
+
+**For Taxa_Data (Family)**
+
+| Scientific.Name | SP1 | SP2 | SP3 | SP4
+| --- | --- | --- | --- | --- | --- | --- |
+| Chthonomonadaceae | 0 | 0 | 0 | 2
+| Salinivirgaceae | 0 | 0 | 0 | 0
+| Hyphomonadaceae | 0 | 0 | 0 | 0
+| Archangiaceae | 0 | 1 | 0 | 0
+
+**For Taxa_LD (Family)**
+
+| Scientific Name | Sample | Abundace
+| --- | --- | --- | --- | --- | --- | --- |
+| Leptospiraceae | SP1 | 2
+| Methylobacteriaceae | SP1 | 2
+| Burkholderiaceae | SP1 | 893
+| Selenomonadaceae | SP1 | 5
+
+Further in the code, there are four documents more that get created. In the last loop, the program performs an statistical analysis to determine Shannon and Simpson indexes. There 
+
 
 ## Boxplot Creation 
