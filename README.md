@@ -30,7 +30,7 @@ geom_boxplot(fill=sample(mypal, length(treatcol)),fatten=1, outlier.shape = NA)
 
 It is recommended to use the hexadecimal code for the colors in order to get more specific and personalized colors depending on the study. If specificity is not required, the names of the colors can be used instead. 
 
-### Nota 
+### Note 
 Is very important to mention that the modification of this parameters would depend solely on the requirements of the study. It depends on what needs to be shown or analyzed. 
 
 # Data
