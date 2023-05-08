@@ -137,7 +137,7 @@ invisible(lapply(packages, library, character.only = TRUE))
 
 ## Preparación de datos 
 
-setwd("~/Tec_BASE/scripts/Corrida_readme_metgen/") 
+setwd("~/Your/path/") 
 raw_data <- read.table(file.choose(), header = T, sep = ",",quote = "", stringsAsFactors = F, fill = F) 
 raw_data
 #raw_data[,-c(1,2,3)] <-lapply(raw_data[, -c(1,2,3)], as.integer)
